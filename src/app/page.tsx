@@ -1,17 +1,17 @@
-"use client";
-import Image from "next/image";
-import { Button, Box } from "@mui/material";
-import styled from "@emotion/styled";
+"use server";
+import { SignIn } from "./components/sign-in";
+import { auth } from "./auth";
 
-const StyledBox = styled(Box)`
- 
-`;
-export default function Home() {
+import SignOutButton from "./components/sign-out-button";
+
+export default async function Home() {
+  const session = await auth();
+  if (!session?.user) return <SignIn />;
+
   return (
-    <StyledBox>
-      <Button variant="text">Text</Button>
-      <Button variant="contained">Contained</Button>
-      <Button variant="outlined">Outlined</Button>
-    </StyledBox>
+    <div>
+      <h1>Welcome to the Home Page</h1>
+      <SignOutButton />
+    </div>
   );
 }
