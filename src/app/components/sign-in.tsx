@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { signIn } from "@/app/auth-actions";
+import { signIn } from "next-auth/react";
 import { TextField, Button, Container, Typography, Paper } from "@mui/material";
 import { useRouter } from "next/navigation";
 
@@ -16,12 +16,15 @@ export function SignIn() {
       username: formData.get("username") as string,
       password: formData.get("password") as string,
     };
-    await signIn(credentials);
+    // await signInAuth("credentials", { ...credentials })
+    await signIn("credentials", { ...credentials });
   };
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="sm">
       <Paper elevation={3} style={{ padding: 16 }}>
-        <Typography variant="h5">Sign In</Typography>
+        <Typography variant="h5" gutterBottom>
+          Sign In
+        </Typography>
         <form onSubmit={handleSubmit} noValidate>
           <TextField
             required
