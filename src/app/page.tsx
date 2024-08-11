@@ -1,12 +1,13 @@
 "use server";
-import { SignIn } from "./components/sign-in";
+
 import { auth } from "./auth";
 
 import SignOutButton from "./components/sign-out-button";
+import { AuthTabs } from "./components/auth-tab";
 
 export default async function Home() {
   const session = await auth();
-  if (!session?.user) return <SignIn />;
+  if (!session?.user) return <AuthTabs />;
 
   return (
     <div>
